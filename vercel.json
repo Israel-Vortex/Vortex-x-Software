@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "functions": {
+    "api/script.js": {
+      "includeFiles": "private/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/scripts/loader.lua", "destination": "/api/loader" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
+}
