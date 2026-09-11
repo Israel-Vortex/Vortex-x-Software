@@ -1,7 +1,3 @@
-/**
- * GET /api/loader
- * Siempre devuelve Lua (compatible con todos los ejecutores).
- */
 module.exports = function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Cache-Control", "no-store");
@@ -14,22 +10,35 @@ module.exports = function handler(req, res) {
   const host = req.headers["x-forwarded-host"] || req.headers.host || "vortex-x-sage.vercel.app";
   const proto = req.headers["x-forwarded-proto"] || "https";
   const base = `\( {proto}:// \){host}`;
-
   const TOKEN = process.env.SCRIPT_TOKEN || "vx7k2m9gold";
+  const scriptUrl = `\( {base}/api/script?t= \){TOKEN}`;
 
   const lua = `-- Vortex X Sage Loader
-local ok, src = pcall(function()
-  return game:HttpGet("\( {base}/api/script?t= \){TOKEN}")
+local url = "${scriptUrl}"
+local src
+local ok, err = pcall(function()
+  src = game:HttpGet(url)
 end)
-if not ok or type(src) \~= "string" or #src < 20 then
-  return warn("[Vortex] No se pudo cargar el script")
+if not ok then
+  warn("[Vortex] HttpGet fallo: " .. tostring(err))
+  return
 end
-if src:sub(1, 2) == "--" and (src:find("forbidden") or src:find("Browser") or src:find("empty")) then
-  return warn("[Vortex] " .. src:sub(1, 120))
+if type(src) \~= "string" then
+  warn("[Vortex] Respuesta invalida")
+  return
 end
-local fn, err = loadstring(src)
+if #src < 30 then
+  warn("[Vortex] Respuesta muy corta (" .. tostring(#src) .. ")")
+  return
+end
+if src:find("forbidden", 1, true) or src:find("empty script", 1, true) then
+  warn("[Vortex] Server: " .. src:sub(1, 200))
+  return
+end
+local fn, lerr = loadstring(src)
 if not fn then
-  return warn("[Vortex] loadstring: " .. tostring(err))
+  warn("[Vortex] loadstring: " .. tostring(lerr))
+  return
 end
 fn()
 `;
