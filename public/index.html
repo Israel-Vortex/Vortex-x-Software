@@ -44,7 +44,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
       margin-bottom: 40px;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -80,6 +82,13 @@
       margin-top: 2px;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     .status {
       display: inline-flex;
       align-items: center;
@@ -101,9 +110,26 @@
       box-shadow: 0 0 0 4px rgba(142, 217, 166, 0.12);
     }
 
-    .hero {
-      margin-bottom: 28px;
+    .btn-web {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #111;
+      background: linear-gradient(180deg, #ffe08a, var(--gold2));
+      border-radius: 999px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.45) inset, 0 6px 16px rgba(230, 168, 23, 0.22);
+      transition: filter .15s, transform .15s;
     }
+
+    .btn-web:hover { filter: brightness(1.06); }
+    .btn-web:active { transform: scale(0.97); }
+
+    .hero { margin-bottom: 28px; }
 
     .eyebrow {
       font-size: 11px;
@@ -151,11 +177,7 @@
       padding: 0 4px;
     }
 
-    .card-head strong {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
+    .card-head strong { font-size: 13px; font-weight: 700; }
     .card-head small {
       display: block;
       margin-top: 3px;
@@ -264,11 +286,56 @@
 
     .hint strong { color: var(--text); font-weight: 650; }
 
+    .web-card {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(22, 22, 26, 0.85);
+    }
+
+    .web-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .web-card p strong {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .btn-web-lg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 18px;
+      font-size: 13px;
+      font-weight: 720;
+      text-decoration: none;
+      color: #111;
+      background: linear-gradient(180deg, #ffe08a, var(--gold2));
+      border-radius: 12px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.5) inset, 0 8px 20px rgba(230, 168, 23, 0.25);
+      white-space: nowrap;
+    }
+
     footer {
       margin-top: 36px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
       color: var(--muted);
       font-size: 12px;
       border-top: 1px solid var(--line);
@@ -308,7 +375,8 @@
       .grid { grid-template-columns: 1fr; }
       .code-box { flex-direction: column; }
       .btn { min-height: 42px; }
-      header { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .web-card { flex-direction: column; align-items: stretch; }
+      .btn-web-lg { width: 100%; }
     }
   </style>
 </head>
@@ -322,7 +390,10 @@
           <span>Script Host · Vercel</span>
         </div>
       </div>
-      <div class="status"><i></i> Servicios en línea</div>
+      <div class="header-actions">
+        <div class="status"><i></i> Servicios en línea</div>
+        <a class="btn-web" href="https://vortex-x-software.netlify.app/" target="_blank" rel="noreferrer">Ir a la web ↗</a>
+      </div>
     </header>
 
     <section class="hero">
@@ -366,6 +437,16 @@
       </article>
     </div>
 
+    <div class="web-card">
+      <p>
+        <strong>Sitio oficial Vortex X</strong>
+        Scripts, novedades y comunidad.
+      </p>
+      <a class="btn-web-lg" href="https://vortex-x-software.netlify.app/" target="_blank" rel="noreferrer">
+        Regresar a la web ↗
+      </a>
+    </div>
+
     <p class="hint">
       <strong>Importante:</strong> no abras <code>/api/script</code> en Chrome.
       Usa solo el loader de arriba en Delta, Hydrogen, Codex u otro executor.
@@ -373,7 +454,7 @@
 
     <footer>
       <span>Vortex X © 2026</span>
-      <a href="/api/loader" target="_blank" rel="noreferrer">Ver loader ↗</a>
+      <a href="https://vortex-x-software.netlify.app/" target="_blank" rel="noreferrer">vortex-x-software.netlify.app</a>
     </footer>
   </div>
 
