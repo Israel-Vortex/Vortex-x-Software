@@ -27,7 +27,7 @@ local BASE_URL =
 	"https://raw.githubusercontent.com/Israel-Vortex/vortex-x-scripts/refs/heads/main/Official-Vortex-Software/Dev-Project/"
 
 local games = {
-	[135856908115931] = "Duels.lua",
+	[135856908115931, 74084441161738] = "Duels.lua",
 	[142823291] = "MM2.lua",
 	[125927821145949] = "MOUNTAIN.lua",
 	[107778070777162] = "StealAnEgg.lua",
